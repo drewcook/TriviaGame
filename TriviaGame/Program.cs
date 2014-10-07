@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -113,7 +114,16 @@ namespace TriviaGame
         {
             //Get Contents from the file.  Remove the special char "\r".  Split on each line.  Convert to a list.
             //List<string> contents = File.ReadAllText("~/trivia.txt").Replace("\r", "").Split('\n').ToList();
-            List<string> contents = File.ReadAllText("trivia.txt").Replace("\r", "").Split('\n').ToList();
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourceName = "TriviaGame.trivia.txt";
+            string result;
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                result = reader.ReadToEnd();
+            }
+
+            List<string> contents = result.Replace("\r", "").Split('\n').ToList();
             //Each item in list "contents" is now one line of the Trivia.txt document.
             
             //make a new list to return all trivia questions
