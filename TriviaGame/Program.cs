@@ -112,8 +112,8 @@ namespace TriviaGame
         static List<Trivia> GetTriviaList()
         {
             //Get Contents from the file.  Remove the special char "\r".  Split on each line.  Convert to a list.
-            List<string> contents = File.ReadAllText("~/trivia.txt").Replace("\r", "").Split('\n').ToList();
-
+            //List<string> contents = File.ReadAllText("~/trivia.txt").Replace("\r", "").Split('\n').ToList();
+            List<string> contents = File.ReadAllText("trivia.txt").Replace("\r", "").Split('\n').ToList();
             //Each item in list "contents" is now one line of the Trivia.txt document.
             
             //make a new list to return all trivia questions
